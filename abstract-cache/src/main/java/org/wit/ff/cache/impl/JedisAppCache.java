@@ -257,6 +257,8 @@ public class JedisAppCache implements IAppCache {
                     valBytes = ByteUtil.doubleToByte8((Double) val);
                 } else if (classType.equals(Float.TYPE)) {
                     valBytes = ByteUtil.floatToByte4((Float) val);
+                } else if(val instanceof byte[]) {
+                    valBytes = (byte[])val;
                 } else {
                     throw new IllegalArgumentException("unsupported value type, classType is:" + classType);
                 }

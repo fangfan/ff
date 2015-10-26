@@ -1,5 +1,6 @@
 package org.wit.ff.business;
 
+import org.springframework.stereotype.Service;
 import org.wit.ff.cache.Cache;
 import org.wit.ff.model.User;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * Created by F.Fang on 2015/10/22.
  * Version :2015/10/22
  */
+@Service
 public class UserBusiness {
 
     @Cache
@@ -30,6 +32,7 @@ public class UserBusiness {
         return user;
     }
 
+    @Cache
     public void saveUser(int appId, User user){
         System.out.println("do business, saveUser");
     }
