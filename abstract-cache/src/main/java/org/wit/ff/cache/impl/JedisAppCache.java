@@ -291,7 +291,7 @@ public class JedisAppCache implements IAppCache {
                 }
             } else {
                 // 其它均采用序列化
-                obj = serializer.deserialize(bytes);
+                obj = serializer.deserialize(bytes,type);
             }
         }
         return (T) obj;

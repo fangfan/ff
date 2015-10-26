@@ -23,6 +23,8 @@
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
         <commons-lang.version>3.4</commons-lang.version>
         <commons-dbcp.version>2.1</commons-dbcp.version>
+        <protobuf.version>2.4.1</protobuf.version>
+        <protostuff.version>1.0.7</protostuff.version>
         <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
     </properties>
@@ -132,6 +134,25 @@
             <groupId>com.googlecode.xmemcached</groupId>
             <artifactId>xmemcached</artifactId>
             <version>${xmemecached.version}</version>
+        </dependency>
+
+        <!-- proto stuff -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>${protobuf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dyuproject.protostuff </groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dyuproject.protostuff </groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>${protostuff.version}</version>
         </dependency>
 
     </dependencies>
