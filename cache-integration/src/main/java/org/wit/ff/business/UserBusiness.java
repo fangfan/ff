@@ -16,7 +16,7 @@ public class UserBusiness {
 
     @Cache
     public List<User> getUser(int appId, List<Integer> userIds){
-        System.out.println("do business, getUser");
+        System.out.println("do business, getUser, appId="+appId);
         User user1 = new User(1, "f.fang@adchina.com", "fangfan");
         User user2 = new User(2,"mm@adchina.com","mm");
         List<User> list = new ArrayList<>();
@@ -27,7 +27,7 @@ public class UserBusiness {
 
     @Cache
     public User findUnique(int appId, int id){
-        System.out.println("do business, findUnique");
+        System.out.println("do business, findUnique, appId="+appId);
         User user = new User(100, "am@gmail.com", "am");
         return user;
     }

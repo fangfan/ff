@@ -39,6 +39,7 @@ public class BusinessCacheAspect {
         Class<?> returnType = ms.getMethod().getReturnType();
         // 返回类型为空,不会应用缓存策略
         if (Void.TYPE.equals(returnType)) {
+            // 实际上, 在你并不想改变业务模型的条件下, pjp.proceed()和pjp.proceed(params) 无差别.
             return pjp.proceed();
         }
         String key = JsonUtil.objectToJson(cacheKey);

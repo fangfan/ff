@@ -19,7 +19,7 @@ public class CacheIntegrationTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void demo(){
-        User user1 = userBusiness.findUnique(1,1000);
+        User user1 = userBusiness.findUnique(3,1000);
         System.out.println(user1);
         userBusiness.saveUser(1, new User());
 
