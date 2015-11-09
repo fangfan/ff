@@ -20,6 +20,9 @@ public class BusinessCacheAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BusinessCacheAspect.class);
 
+    /**
+     * 实际的数据缓存服务提供者.
+     */
     private IAppCache appCache;
 
     @Pointcut("@annotation(org.wit.ff.cache.Cache)")
@@ -42,6 +45,7 @@ public class BusinessCacheAspect {
             // 实际上, 在你并不想改变业务模型的条件下, pjp.proceed()和pjp.proceed(params) 无差别.
             return pjp.proceed();
         }
+        // Json化可以避免掉许多的问题, 不必通过重写CacheKey的equals方法来比较, 因为实现会比较的复杂, 并且不见得能做好.
         String key = JsonUtil.objectToJson(cacheKey);
         // 查询缓存,即使缓存失败,也不能影响正常业务逻辑执行.
         Object result = null;
