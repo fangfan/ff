@@ -1,4 +1,4 @@
-package org.wit.ff.aspect;
+package org.wit.ff.log;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

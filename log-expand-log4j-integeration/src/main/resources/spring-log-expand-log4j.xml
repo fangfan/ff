@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"  xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <!-- 本地内置的代理服务 -->
+    <!--
+    <bean id="localBroker" class="org.apache.activemq.broker.BrokerService"
+          init-method="start" destroy-method="stop">
+        <property name="brokerName" value="mainBroker" />
+        <property name="persistent" value="false" />
+        <property name="transportConnectorURIs">
+            <list>
+                <value>tcp://localhost:61616</value>
+            </list>
+        </property>
+    </bean>
+    -->
+
+    <!-- 客户端连接工厂 -->
+    <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL">
+            <value>tcp://localhost:61616</value>
+        </property>
+    </bean>
+
+    <!-- 监听器. -->
+    <bean id="businessLogListenerContainer"
+          class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destinationName" value="demo.common.log" />
+        <property name="messageListener" ref="messageListener" />
+    </bean>
+
+    <bean id="messageListener" class="org.wit.ff.log.CommonLogMessageListener" />
+
+    <!-- 启动service扫描 -->
+	<context:component-scan base-package="org.wit.ff.business"/>
+</beans>

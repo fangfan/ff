@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"  xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <!-- 本地内置的代理服务, 如果外置的Activemq已启动，请注释 -->
+    <!--
+    <bean id="localBroker" class="org.apache.activemq.broker.BrokerService"
+          init-method="start" destroy-method="stop">
+        <property name="brokerName" value="mainBroker" />
+        <property name="persistent" value="false" />
+        <property name="transportConnectorURIs">
+            <list>
+                <value>tcp://localhost:61616</value>
+            </list>
+        </property>
+    </bean>
+    -->
+
+    <!-- 客户端连接工厂 -->
+    <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL">
+            <value>tcp://localhost:61616</value>
+        </property>
+    </bean>
+
+    <!-- Jms模版 -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+    </bean>
+
+    <!-- 目标队列 -->
+    <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="demo.business.log" />
+    </bean>
+
+    <!-- 监听器. -->
+    <bean id="businessLogListenerContainer"
+          class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destinationName" value="demo.business.log" />
+        <property name="messageListener" ref="messageListener" />
+    </bean>
+
+    <bean id="messageListener" class="org.wit.ff.log.BusinessLogMessageListener" />
+
+    <!-- 日志Aspect扫描 -->
+    <bean id="logAspect" class="org.wit.ff.log.BusinessLogAspect" />
+
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 启动service扫描 -->
+	<context:component-scan base-package="org.wit.ff.business"/>
+</beans>

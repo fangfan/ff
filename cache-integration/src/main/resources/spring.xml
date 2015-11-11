@@ -10,7 +10,7 @@
     <import resource="classpath:spring-memcached.xml" />
 
 	 <!-- Aspect扫描 Aspect配置的顺序决定了谁先执行.-->
-    <bean id="cacheAspect" class="org.wit.ff.aspect.BusinessCacheAspect" >
+    <bean id="cacheAspect" class="org.wit.ff.log.BusinessCacheAspect" >
         <property name="appCache" ref="xmemAppCache"/>
     </bean>
 

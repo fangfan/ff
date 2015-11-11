@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- ===================================================================== -->
+    <!--  以下是appender的定义                                                 -->
+    <!-- ===================================================================== -->
+
+    <!-- org.apache.log4j.ConsoleAppender -->
+    <appender name="PROJECT-CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+   
+    <appender name="businessAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="logs/business.log"/>
+        <!-- 若配置为true,表示在原有日志上继续append -->
+        <param name="append" value="true"/>
+        <!-- 若配置为false,表示清空原有日志 -->
+        <!-- <param name="append" value="false"/> -->
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    
+    <!-- 定义logger,链接多个Appender表示信息将输出到多个目标(可以是文件,也可以是控制台或其它) -->
+    <logger name="org.wit.ff.business" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="businessAppender"/>
+        <appender-ref ref="PROJECT-CONSOLE"/>
+    </logger>
+    
+    <!-- ===================================================================== -->
+    <!--  Root logger的定义                                                    -->
+    <!-- ===================================================================== -->
+    <root>
+    <!--  DEBUG < INFO < WARN < ERROR < FATAL -->
+        <level value="INFO"></level>
+        <!-- <level value="WARN"/> -->
+        <appender-ref ref="PROJECT-CONSOLE"/>
+    </root>
+</log4j:configuration>
