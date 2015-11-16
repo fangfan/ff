@@ -1,7 +1,7 @@
 package org.wit.ff.jdbc.core;
 
-import dos.tool.jdbc.exception.DosDataAccessException;
 import org.slf4j.Logger;
+import org.wit.ff.jdbc.exception.DbUtilsDataAccessException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -61,14 +61,14 @@ public class SingleConnDataAccessor extends AbstractDataAccessor {
                 Class.forName(driver);
             } catch (ClassNotFoundException e) {
                 LOG.error("driver not found", e);
-                throw new DosDataAccessException("driver not found!", e);
+                throw new DbUtilsDataAccessException("driver not found!", e);
             }
             try {
                 Connection connection = DriverManager.getConnection(url, username, password);
                 connectionHolder.set(connection);
             } catch (SQLException e) {
                 LOG.error("get connection error!", e);
-                throw new DosDataAccessException("get connection error!", e);
+                throw new DbUtilsDataAccessException("get connection error!", e);
             }
         }
         return connectionHolder.get();

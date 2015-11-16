@@ -14,6 +14,15 @@ import java.util.Map;
 public interface IDataAccessor {
 
     /**
+     * 查询
+     * @param sql
+     * @param resultType 对象类型
+     * @param <T>
+     * @return
+     */
+    <T> List<T> query(String sql, Class<T> resultType);
+
+    /**
      * 查询,如果返回类型是具体类型,那么就采用
      * @param sql 查询语句
      * @param params 查询参数
@@ -22,6 +31,13 @@ public interface IDataAccessor {
      * @return
      */
     <T> List<T> query(String sql, Object[] params, Class<T> resultType);
+
+    /**
+     *
+     * @param sql
+     * @return
+     */
+    List<Map<String,Object>> queryMap(String sql);
 
     /**
      * 查询, map.

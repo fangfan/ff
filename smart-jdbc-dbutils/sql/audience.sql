@@ -1,0 +1,1 @@
+create table audience (id integer primary key , name varchar(20), pay double);

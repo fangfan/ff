@@ -27,6 +27,11 @@ public abstract class AbstractDataAccessor implements IDataAccessor {
     protected abstract void closeConn(Connection conn);
 
     @Override
+    public <T> List<T> query(String sql, Class<T> resultType){
+        return query(sql, null, resultType);
+    }
+
+    @Override
     public <T> List<T> query(String sql, Object[] params, Class<T> resultType) {
         if (resultType == null || StringUtils.isBlank(sql)) {
             throw new DbUtilsDataAccessException("resultType can't be null and sql can't be blank!");
@@ -47,6 +52,11 @@ public abstract class AbstractDataAccessor implements IDataAccessor {
             closeConn(conn);
         }
         return result;
+    }
+
+    @Override
+    public List<Map<String,Object>> queryMap(String sql){
+        return queryMap(sql, null);
     }
 
     @Override
