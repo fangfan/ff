@@ -32,20 +32,6 @@ public interface IDataAccessor {
      */
     <T> List<T> query(String sql, Object[] params, Class<T> resultType);
 
-    /**
-     *
-     * @param sql
-     * @return
-     */
-    List<Map<String,Object>> queryMap(String sql);
-
-    /**
-     * 查询, map.
-     * @param sql
-     * @param params
-     * @return
-     */
-    List<Map<String,Object>> queryMap(String sql, Object[] params);
 
     /**
      * insert 对象列表.

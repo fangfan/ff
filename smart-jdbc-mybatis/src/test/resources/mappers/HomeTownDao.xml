@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.wit.ff.jdbc.dao.HomeTownDao">
+
+    <insert id="insertList" useGeneratedKeys="true" keyProperty="id">
+        insert into hometown (name,location) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.name},#{item.location})
+        </foreach>
+    </insert>
+
+    <select id="findAll" resultType="HomeTown" >
+        select * from hometown
+    </select>
+
+    <insert id="batchInsert" parameterType="org.wit.ff.jdbc.id.BatchInsertEntities" useGeneratedKeys="true" keyProperty="id"
+        keyColumn="ID">
+
+        insert into hometown
+        (name,location)
+        values
+        <foreach item="item" collection="entities" separator=",">
+            ( #{item.name},#{item.location})
+        </foreach>
+    </insert>
+
+</mapper>

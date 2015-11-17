@@ -1,0 +1,1 @@
+create table hometown(id integer primary key auto_increment, name varchar(20), location varchar(50));

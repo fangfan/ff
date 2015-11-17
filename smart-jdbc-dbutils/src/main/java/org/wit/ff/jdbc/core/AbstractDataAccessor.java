@@ -2,10 +2,7 @@ package org.wit.ff.jdbc.core;
 
 
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayHandler;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.apache.commons.dbutils.handlers.*;
 import org.apache.commons.lang3.StringUtils;
 import org.wit.ff.jdbc.converter.ParamsConverter;
 import org.wit.ff.jdbc.exception.DbUtilsDataAccessException;
@@ -48,35 +45,6 @@ public abstract class AbstractDataAccessor implements IDataAccessor {
             }
         } catch (Exception e) {
             throw new DbUtilsDataAccessException("query error, sql is:" + sql, e);
-        } finally {
-            closeConn(conn);
-        }
-        return result;
-    }
-
-    @Override
-    public List<Map<String,Object>> queryMap(String sql){
-        return queryMap(sql, null);
-    }
-
-    @Override
-    public List<Map<String, Object>> queryMap(String sql, Object[] params) {
-        if (StringUtils.isBlank(sql)) {
-            throw new DbUtilsDataAccessException("sql can't be blank!");
-        }
-        QueryRunner runner = new QueryRunner();
-        Connection conn = null;
-        List<Map<String, Object>> result = null;
-        MapListHandler handler = new MapListHandler();
-        try {
-            conn = getConnection();
-            if (params != null) {
-                result = runner.query(conn, sql, handler, params);
-            } else {
-                result = runner.query(conn, sql, handler);
-            }
-        } catch (Exception e) {
-            throw new DbUtilsDataAccessException("queryMap error, sql is:" + sql, e);
         } finally {
             closeConn(conn);
         }
