@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.wit.ff.jdbc.access.IDataAccessor;
 import org.wit.ff.jdbc.converter.ParamsConverter;
-import org.wit.ff.jdbc.core.IDataAccessor;
 import org.wit.ff.jdbc.sql.mysql.MySQLBuilder;
 
 import java.util.ArrayList;

@@ -1,17 +1,17 @@
-package org.wit.ff.jdbc.core;
+package org.wit.ff.jdbc.access.dbutils;
 
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.*;
 import org.apache.commons.lang3.StringUtils;
 import org.wit.ff.jdbc.converter.ParamsConverter;
+import org.wit.ff.jdbc.access.IDataAccessor;
 import org.wit.ff.jdbc.exception.DbUtilsDataAccessException;
 import org.wit.ff.jdbc.id.IdGenerator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by F.Fang on 2015/3/31.

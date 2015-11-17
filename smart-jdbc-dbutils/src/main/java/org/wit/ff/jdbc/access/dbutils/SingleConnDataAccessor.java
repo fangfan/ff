@@ -1,4 +1,4 @@
-package org.wit.ff.jdbc.core;
+package org.wit.ff.jdbc.access.dbutils;
 
 import org.slf4j.Logger;
 import org.wit.ff.jdbc.exception.DbUtilsDataAccessException;

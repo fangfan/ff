@@ -1,10 +1,9 @@
-package org.wit.ff.jdbc.core;
+package org.wit.ff.jdbc.access;
 
 
 import org.wit.ff.jdbc.converter.ParamsConverter;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by F.Fang on 2015/3/31.

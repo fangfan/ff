@@ -48,7 +48,7 @@
         <property name="validationQuery" value="SELECT NOW() FROM DUAL"/>
     </bean>
 
-    <bean id="dataAccessor" class="org.wit.ff.jdbc.core.DefaultDataAccessor">
+    <bean id="dataAccessor" class="org.wit.ff.jdbc.access.dbutils.DefaultDataAccessor">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

@@ -1,4 +1,4 @@
-package org.wit.ff.jdbc.core;
+package org.wit.ff.jdbc.access.dbutils;
 
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
