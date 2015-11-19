@@ -7,6 +7,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.wit.ff.jdbc.dao.HomeTownDao;
 import org.wit.ff.jdbc.id.BatchInsertEntities;
 import org.wit.ff.jdbc.model.HomeTown;
+import org.wit.ff.jdbc.query.Criteria;
 
 import java.util.ArrayList;
 import java.util.List;

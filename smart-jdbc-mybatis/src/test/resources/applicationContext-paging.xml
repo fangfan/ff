@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+
+    <!-- 加载properties配置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!-- 这里支持多种寻址方式：classpath和file -->
+                <value>classpath:dbconfig.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 数据库连接池 -->
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${db.driverClass}"/>
+        <property name="url" value="${db.jdbcUrl}"/>
+        <property name="username" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+    </bean>
+
+    <!-- 配置 SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <!-- 制定路径自动加载mapper配置文件 -->
+        <property name="mapperLocations" value="classpath:mappers/*Dao.xml"/>
+
+        <!-- 配置myibatis的settings http://mybatis.github.io/mybatis-3/zh/configuration.html#settings -->
+        <property name="configurationProperties">
+            <props>
+                <prop key="cacheEnabled">true</prop>
+            </props>
+        </property>
+
+        <property name="typeHandlers">
+            <list>
+                <bean class="org.wit.ff.jdbc.id.BatchInsertEntitiesTypeHandler"/>
+            </list>
+        </property>
+
+        <property name="objectWrapperFactory" ref="batchObjectWrapperFactory"/>
+
+        <!-- 类型别名是为 Java 类型命名一个短的名字。 它只和 XML 配置有关, 只用来减少类完全 限定名的多余部分 -->
+        <property name="typeAliasesPackage" value="org.wit.ff.jdbc.model"/>
+
+    </bean>
+
+    <bean id="batchObjectWrapperFactory" class="org.wit.ff.jdbc.id.BatchInsertObjectWrapperFactory"/>
+
+    <mybatis:scan base-package="org.wit.ff.jdbc.dao"/>
+
+</beans>

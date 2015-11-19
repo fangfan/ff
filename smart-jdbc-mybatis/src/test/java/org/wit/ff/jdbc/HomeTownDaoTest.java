@@ -25,6 +25,9 @@ public class HomeTownDaoTest extends AbstractJUnit4SpringContextTests {
         System.out.println(homeTownDao.findAll());
     }
 
+    /**
+     * 无法通过单纯的列表生成主键.
+     */
     @Test
     public void testInsertList(){
         HomeTown ht1 = new HomeTown();

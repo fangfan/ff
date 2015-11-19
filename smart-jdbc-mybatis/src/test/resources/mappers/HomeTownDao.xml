@@ -17,6 +17,10 @@
         select * from hometown
     </select>
 
+    <select id="find" resultType="HomeTown" >
+        select * from hometown
+    </select>
+
     <insert id="batchInsert" parameterType="org.wit.ff.jdbc.id.BatchInsertEntities" useGeneratedKeys="true" keyProperty="id"
         keyColumn="ID">
 
