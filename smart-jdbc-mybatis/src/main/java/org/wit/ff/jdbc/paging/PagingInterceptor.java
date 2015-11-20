@@ -58,7 +58,7 @@ public abstract class PagingInterceptor implements Interceptor {
             }
 
             // 参数一定要匹配Criteria类型
-            if (lastParam != null && !(lastParam instanceof Criteria)) {
+            if (lastParam == null || !(lastParam instanceof Criteria)) {
                 return invocation.proceed();
             }
 
