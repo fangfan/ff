@@ -24,8 +24,8 @@ public class HomeTownDaoPagingTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testFind() {
-        //System.out.println(homeTownDao.find(1, new Criteria().page(1, 10)));
-        System.out.println(homeTownDao.find(1, null));
+        System.out.println(homeTownDao.find(1, new Criteria().page(1, 10)));
+        //System.out.println(homeTownDao.find(1, null));
         System.out.println(CriteriaResultHolder.get());
     }
 
