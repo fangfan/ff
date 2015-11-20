@@ -1,6 +1,7 @@
 package org.wit.ff.jdbc.sql;
 
 import org.junit.Test;
+import org.wit.ff.jdbc.sql.db.MySQLBuilder;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,7 +12,7 @@ public class SQLTest {
     //You can pass in your own StringBuilder
     final StringBuilder sb = new StringBuilder();
     //From the tutorial
-    final String sql = new SQLBuilder() {{
+    final String sql = new MySQLBuilder() {{
       SELECT("P.ID, P.USERNAME, P.PASSWORD, P.FULL_NAME");
       SELECT("P.LAST_NAME, P.CREATED_ON, P.UPDATED_ON");
       FROM("PERSON P");
@@ -45,7 +46,7 @@ public class SQLTest {
   @Test
   public void shouldDemonstrateMixedStyle() {
     //Mixed
-    final String sql = new SQLBuilder() {{
+    final String sql = new MySQLBuilder() {{
       SELECT("id, name");
       FROM("PERSON A");
       WHERE("name like ?").WHERE("id = ?");
@@ -60,7 +61,7 @@ public class SQLTest {
   @Test
   public void shouldDemonstrateFluentStyle() {
     //Fluent Style
-    final String sql = new SQLBuilder()
+    final String sql = new MySQLBuilder()
         .SELECT("id, name").FROM("PERSON A")
         .WHERE("name like ?")
         .WHERE("id = ?").toString();
@@ -127,7 +128,7 @@ public class SQLTest {
   }
 
   private static String example1() {
-    return new SQLBuilder() {{
+    return new MySQLBuilder() {{
       SELECT("P.ID, P.USERNAME, P.PASSWORD, P.FULL_NAME");
       SELECT("P.LAST_NAME, P.CREATED_ON, P.UPDATED_ON");
       FROM("PERSON P");
@@ -148,7 +149,7 @@ public class SQLTest {
   }
 
   private static String example2(final String id, final String firstName, final String lastName) {
-    return new SQLBuilder() {{
+    return new MySQLBuilder() {{
       SELECT("P.ID, P.USERNAME, P.PASSWORD, P.FIRST_NAME, P.LAST_NAME");
       FROM("PERSON P");
       if (id != null) {

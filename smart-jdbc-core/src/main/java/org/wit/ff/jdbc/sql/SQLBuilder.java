@@ -15,15 +15,36 @@
  */
 package org.wit.ff.jdbc.sql;
 
-public class SQLBuilder extends AbstractSQLBuilder<SQLBuilder> {
+import org.wit.ff.jdbc.dialect.Dialect;
+
+public abstract class SQLBuilder extends AbstractSQLBuilder<SQLBuilder> {
+
+    protected boolean paging;
+    protected int offset;
+    protected int pageSize;
 
     @Override
     public SQLBuilder getSelf() {
         return this;
     }
 
+    protected abstract Dialect getDialect();
+
     public SQLBuilder PAGE(int offset, int pageSize) {
+        paging = true;
+        // 这里作为底层接口不做任何检查,上层业务调用时检查.
+        this.offset = offset;
+        this.pageSize = pageSize;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        if(paging){
+            return getDialect().getLimitString(super.toString(), offset, pageSize);
+        }else{
+            return super.toString();
+        }
     }
 
 }
