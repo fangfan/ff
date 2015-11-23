@@ -17,7 +17,7 @@ public class DefaultTransactionDataAccessor extends AbstractDataAccessor {
     protected Connection getConnection() throws SQLException {
 
         return DataSourceUtils.getConnection(dataSource);
-        // 虽然可以将连接绑定到事务,但是当外部循dataAccessor的方法时,环调用时会产生多个连接.
+        // 虽然可以将连接绑定到事务,但是当外部循dataAccessor的方法时,循环调用时会产生多个连接.
         //return DataSourceUtils.getConnection(dataSource);
         // 以下写法无法解决事务问题,无法将连接绑定到Spring 事务.
         // return dataSource.getConnection();

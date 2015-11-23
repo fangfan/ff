@@ -1,5 +1,8 @@
 package org.wit.ff.jdbc;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  * Created by F.Fang on 2015/2/16.
  * Version :2015/2/16
@@ -37,10 +40,6 @@ public class Audience {
 
     @Override
     public String toString() {
-        return "Audience{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", pay=" + pay +
-                '}';
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }

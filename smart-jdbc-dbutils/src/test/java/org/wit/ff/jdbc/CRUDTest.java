@@ -24,23 +24,22 @@ public class CRUDTest extends AbstractJUnit4SpringContextTests{
     private IDataAccessor dataAccessor;
 
     @Test
-    public void demo(){
+    public void query(){
         MySQLBuilder builder = new MySQLBuilder();
+        // sql: select * from Audience limit 2
         builder.SELECT("*").FROM("Audience").PAGE(0, 2);
         String sql = builder.toString();
         final Audience audience = new Audience();
         audience.setName("ff");
 
+        // 也可以直接填写SQL.
         List<Audience> list = dataAccessor.query(sql, null, Audience.class);
         System.out.println(list);
-
-//        list = accessor.query("select * from audience where id in(?,?)", new Object[]{1,2}, Audience.class);
-//        System.out.println(list);
-
     }
 
     @Test
     public void insert(){
+        // 批量新增.
         String sql = "insert into audience(id,name,pay) values(?,?,?)";
         Object[][] params = new Object[1][];
         params[0] = new Object[]{100,"ff",100.1};
@@ -49,6 +48,7 @@ public class CRUDTest extends AbstractJUnit4SpringContextTests{
 
     @Test
     public void insertDate(){
+        // 试试日期.
         String sql = "insert into test_date(id,current) values(?,?)";
         Object[][] params = new Object[1][];
         params[0] = new Object[]{100, new Date()};
@@ -57,6 +57,7 @@ public class CRUDTest extends AbstractJUnit4SpringContextTests{
 
     @Test
     public void insertWithParamsConverter(){
+        // 试试PramsConverter好用不.
         ParamsConverter<Audience> converter = new ParamsConverter<Audience>() {
             @Override
             public Object[] convert(Audience audience) {
@@ -65,6 +66,7 @@ public class CRUDTest extends AbstractJUnit4SpringContextTests{
         };
 
         String sql = "insert into audience(id,name,pay) values(?,?,?)";
+        // 构造数据.
         List<Audience> list = new ArrayList<>();
         Audience audience1 = new Audience();
         audience1.setId(250);
@@ -80,7 +82,6 @@ public class CRUDTest extends AbstractJUnit4SpringContextTests{
         list.add(audience2);
 
         dataAccessor.insert(sql, list, Audience.class, converter);
-
 
     }
 
