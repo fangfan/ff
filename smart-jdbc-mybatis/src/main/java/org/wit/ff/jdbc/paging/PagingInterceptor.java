@@ -65,21 +65,27 @@ public abstract class PagingInterceptor implements Interceptor {
             Criteria criteria = (Criteria) lastParam;
             StatementHandler stamentHandler = (StatementHandler) invocation.getTarget();
             BoundSql boundSql = stamentHandler.getBoundSql();
-            // 得到实际的分页sql.
-            int offSet = (criteria.getPageNumber() - 1) * criteria.getPageSize();
-            String pagingSql = getDialect().getLimitString(boundSql.getSql(), offSet, criteria.getPageSize());
+            // 原始mapper文件中配置的Sql.
+            String originSql = boundSql.getSql();
 
+            int offSet = (criteria.getPageNumber() - 1) * criteria.getPageSize();
+            // 实际的分页sql.
+            String pagingSql = getDialect().getLimitString(originSql, offSet, criteria.getPageSize());
+
+            // 重新设置属性.
             metaObject.setValue("delegate.boundSql.sql", pagingSql);
             metaObject.setValue("delegate.rowBounds.offset", RowBounds.NO_ROW_OFFSET);
             metaObject.setValue("delegate.rowBounds.limit", RowBounds.NO_ROW_LIMIT);
 
+            // 获取连接参数.
             Connection connection = (Connection) invocation.getArgs()[0];
-            String sql = boundSql.getSql();
-            int totalCount = getTotalCount(connection, sql, parameterHandler);
-
+            // 总页数.
+            int totalCount = getTotalCount(connection, originSql, parameterHandler);
+            // 填充各属性值.
             CriteriaResult result = new CriteriaResult(criteria.getPageNumber(), criteria.getPageSize(), totalCount);
             CriteriaResultHolder.set(result);
         }
+        // 执行SQL.
         return invocation.proceed();
     }
 
