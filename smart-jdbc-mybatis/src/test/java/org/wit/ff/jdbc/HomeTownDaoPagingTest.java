@@ -24,9 +24,15 @@ public class HomeTownDaoPagingTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testFind() {
+        // Criteria对象包装分页条件.
         System.out.println(homeTownDao.find(1, new Criteria().page(1, 1)));
         //System.out.println(homeTownDao.find(1, null));
-        System.out.println(CriteriaResultHolder.get());
+        // 从线程上下文中获取总页数,总记录数等信息.
+        try {
+            System.out.println(CriteriaResultHolder.get());
+        }finally {
+            CriteriaResultHolder.remove();
+        }
     }
 
 }

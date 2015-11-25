@@ -28,20 +28,20 @@ public class BatchInsertEntitiesTypeHandler extends BaseTypeHandler<BatchInsertE
     public void setNonNullParameter(PreparedStatement ps, int i, BatchInsertEntityPrimaryKeys parameter,
             JdbcType jdbcType) throws SQLException {
         // TODO Auto-generated method stub
-        System.out.println(" BatchInsertEntitiesTypeHandler#setNonNullParameter got called. ");
+        //System.out.println(" BatchInsertEntitiesTypeHandler#setNonNullParameter got called. ");
     }
 
     @Override
     public BatchInsertEntityPrimaryKeys getNullableResult(ResultSet rs, String columnName) throws SQLException {
         // TODO Auto-generated method stub
-        System.out.println(" BatchInsertEntitiesTypeHandler#getNullableResult got called. ");
+        //System.out.println(" BatchInsertEntitiesTypeHandler#getNullableResult got called. ");
         return null;
     }
 
     @Override
     public BatchInsertEntityPrimaryKeys getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         // TODO Auto-generated method stub
-        System.out.println(" BatchInsertEntitiesTypeHandler#getNullableResult got called. ");
+        //System.out.println(" BatchInsertEntitiesTypeHandler#getNullableResult got called. ");
         return null;
     }
 

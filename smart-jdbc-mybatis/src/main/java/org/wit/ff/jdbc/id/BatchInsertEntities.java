@@ -2,7 +2,7 @@ package org.wit.ff.jdbc.id;
 
 import java.util.List;
 
-public class BatchInsertEntities<T> {
+public class BatchInsertEntities<T extends IdGenerator> {
     private final List<T> entities;
 
     public BatchInsertEntities(List<T> entities) {

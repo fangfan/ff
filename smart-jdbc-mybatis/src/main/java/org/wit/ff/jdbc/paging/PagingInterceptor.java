@@ -29,6 +29,9 @@ import java.util.Properties;
  */
 public abstract class PagingInterceptor implements Interceptor {
 
+    /**
+     * regex匹配statementId.
+     */
     protected String statementRegex;
 
     @Override
@@ -51,6 +54,7 @@ public abstract class PagingInterceptor implements Interceptor {
             // 如果有多个参数,取最后一个参数.
             if (object instanceof HashMap) {
                 HashMap map = (HashMap) object;
+                // 这个逻辑始终不太放心, 日后若有更好的实现再改.
                 String key = "param"+String.valueOf(map.keySet().size()/2);
                 lastParam = map.get(key);
             } else {

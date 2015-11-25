@@ -10,11 +10,7 @@ public class CriteriaResultHolder {
     private CriteriaResultHolder(){}
 
     public static CriteriaResult get() {
-        try {
-            return criteriaResult.get();
-        } finally {
-            criteriaResult.remove();
-        }
+        return criteriaResult.get();
     }
 
     public static void set(CriteriaResult value){

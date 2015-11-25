@@ -39,21 +39,10 @@
                 <prop key="cacheEnabled">true</prop>
             </props>
         </property>
-
-        <property name="typeHandlers">
-            <list>
-                <bean class="org.wit.ff.jdbc.id.BatchInsertEntitiesTypeHandler"/>
-            </list>
-        </property>
-
-        <property name="objectWrapperFactory" ref="batchObjectWrapperFactory"/>
-
         <!-- 类型别名是为 Java 类型命名一个短的名字。 它只和 XML 配置有关, 只用来减少类完全 限定名的多余部分 -->
         <property name="typeAliasesPackage" value="org.wit.ff.jdbc.model"/>
 
     </bean>
-
-    <bean id="batchObjectWrapperFactory" class="org.wit.ff.jdbc.id.BatchInsertObjectWrapperFactory"/>
 
     <mybatis:scan base-package="org.wit.ff.jdbc.dao"/>
 

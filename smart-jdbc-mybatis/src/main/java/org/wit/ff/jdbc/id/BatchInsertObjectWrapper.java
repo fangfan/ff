@@ -42,6 +42,7 @@ public class BatchInsertObjectWrapper implements ObjectWrapper {
     public Object get(PropertyTokenizer prop) {
         // Only the entities or parameters property of BatchInsertEntities
         // can be accessed by mapper.
+        // 这一段是决定最终返回数据结果.
         if ("entities".equals(prop.getName()) ||
                 "parameters".equals(prop.getName())) {
             return entity.getEntities();
