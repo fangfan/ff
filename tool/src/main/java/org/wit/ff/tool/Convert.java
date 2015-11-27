@@ -21,7 +21,7 @@ public class Convert {
      */
     public static void main(String[] args) throws IOException {
         //GBK编码格式源码路径
-        String srcDirPath = "D:\\workspace-github\\distributed-dbutil";
+        String srcDirPath = "D:\\workspace-github\\jmockit";
         //转为UTF-8编码格式源码路径
         String utf8DirPath = "E:\\bak";
 
