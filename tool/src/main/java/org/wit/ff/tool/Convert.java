@@ -1,4 +1,4 @@
-
+package org.wit.ff.tool;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,8 +9,9 @@ import jodd.io.FileNameUtil;
 import jodd.io.FileUtil;
 
 /**
- * @author  <a href="mailto:ketayao@gmail.com">ketayao</a>
+ * @author  <a href="mailto:ketayao@gmail.com">ketayao</a>，作者并非本人，这里copy了他的代码，表示感谢.
  * @since   2014年2月20日 上午10:49:33
+ * 将GBK格式文件转换成UTF-8
  */
 public class Convert {
 
