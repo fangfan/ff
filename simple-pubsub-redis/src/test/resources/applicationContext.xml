@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="  
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- JedisPool -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="4" />
+        <property name="maxIdle" value="2" />
+        <property name="maxWaitMillis" value="10000" />
+        <property name="testOnBorrow" value="true" />
+    </bean>
+
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1" value="192.168.21.125" />
+        <constructor-arg index="2" value="6379" />
+        <constructor-arg index="3" value="10000" />
+        <constructor-arg index="4" value="enterprise" />
+    </bean>
+
+    <bean id="messageListenerContainer" class="org.wit.ff.ps.listener.redis.RedisMessageListenerContainer"
+        init-method="init">
+        <property name="messageTasks">
+            <list>
+                <ref bean="helloChannelTask" />
+                <ref bean="userChannelTask" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="helloChannelTask" class="org.wit.ff.ps.listener.redis.RedisBinaryMessageListenerTask">
+        <constructor-arg ref="jedisPool" />
+        <constructor-arg ref="helloChannelMode" />
+        <constructor-arg ref="helloChannelListener" />
+    </bean>
+
+    <bean id="helloChannelMode" class="org.wit.ff.ps.listener.redis.RedisChannelMode">
+        <property name="pattern" value="false" />
+        <property name="channel" value="hello.world" />
+    </bean>
+
+    <bean id="helloChannelListener" class="org.wit.ff.ps.listener.HelloChannelListener" />
+
+    <bean id="userChannelTask" class="org.wit.ff.ps.listener.redis.RedisBinaryMessageListenerTask">
+        <constructor-arg ref="jedisPool" />
+        <constructor-arg ref="userChannelMode" />
+        <constructor-arg ref="userChannelListener" />
+    </bean>
+
+    <bean id="userChannelMode" class="org.wit.ff.ps.listener.redis.RedisChannelMode">
+        <property name="pattern" value="false" />
+        <property name="channel" value="hello.user" />
+    </bean>
+
+    <bean id="userChannelListener" class="org.wit.ff.ps.listener.UserChannelListener" />
+
+</beans>

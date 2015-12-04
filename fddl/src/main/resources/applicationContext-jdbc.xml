@@ -38,7 +38,7 @@
 		<property name="password" value="${db2.password}" />
 	</bean>
 
-	<bean id="dataSource" class="com.adchina.dbutil.datasource.DynamicDataSource">
+	<bean id="dataSource" class="org.wit.fddl.datasource.DynamicDataSource">
 		<property name="targetDataSources">
 			<map key-type="java.lang.String">
 				<entry key="DB1" value-ref="dataSource1" />
@@ -65,7 +65,7 @@
 	<!-- 启动service扫描 -->
 	<context:component-scan base-package="com.adchina.dbutil.service"/>
 
-	<bean id="customDataHandler" class="com.adchina.dbutil.datahandle.CustomDataHandlerForJdbc">
+	<bean id="customDataHandler" class="org.wit.fddl.datahandle.CustomDataHandlerForJdbc">
 		<constructor-arg>
 			<list>
 				<value>DB1</value>
@@ -75,7 +75,7 @@
 		<constructor-arg name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
     
-    <bean id="querySqlJdbcHandler" class="com.adchina.dbutil.sqlhandler.QuerySqlJdbcHandler">
+    <bean id="querySqlJdbcHandler" class="org.wit.fddl.sqlhandler.QuerySqlJdbcHandler">
         <constructor-arg>
             <list>
                 <value>DB1</value>
@@ -89,7 +89,7 @@
 	<!-- <bean
 		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="staticMethod"
-			value="com.adchina.dbutil.CustomDataHandlerContext.setCustomDataHandler" />
+			value="CustomDataHandlerContext.setCustomDataHandler" />
 		<property name="arguments">
 			<list>
 				<ref bean="customDataHandler" />
@@ -100,7 +100,7 @@
     <bean
         class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="staticMethod"
-            value="com.adchina.dbutil.CustomDataHandlerContext.setQuerySqlJdbcHandler" />
+            value="org.wit.fddl.CustomDataHandlerContext.setQuerySqlJdbcHandler" />
         <property name="arguments">
             <list>
                 <ref bean="querySqlJdbcHandler" />
