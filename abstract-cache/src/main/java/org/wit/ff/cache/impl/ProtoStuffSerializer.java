@@ -31,8 +31,8 @@ public class ProtoStuffSerializer<T> implements ISerializer<T>{
 
     @Override
     public T deserialize(byte[] bytes, Class<T> targetClass) {
-        if (bytes == null || bytes.length == 0) {
-            throw new RuntimeException("deserialize bytes is empty!");
+        if (bytes == null || bytes.length == 0 || targetClass==null) {
+            throw new RuntimeException("deserialize bytes is empty or targetClass is null!");
         }
         T instance = null;
         try {
