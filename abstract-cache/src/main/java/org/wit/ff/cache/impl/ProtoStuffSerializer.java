@@ -14,7 +14,7 @@ public class ProtoStuffSerializer<T> implements ISerializer<T>{
     @Override
     public byte[] serialize(T obj) {
         if (obj == null) {
-            throw new RuntimeException("serialize (" + obj + ") can't be null!");
+            throw new RuntimeException("serializer (" + obj + ") can't be null!");
         }
         Schema schema = RuntimeSchema.getSchema(obj.getClass());
         LinkedBuffer buffer = LinkedBuffer.allocate(1024 * 1024);
@@ -22,7 +22,7 @@ public class ProtoStuffSerializer<T> implements ISerializer<T>{
         try {
             bytes = ProtostuffIOUtil.toByteArray(obj, schema, buffer);
         } catch (Exception e) {
-            throw new RuntimeException("serialize(obj=" + obj + ",class=" + obj.getClass() + ")  catch exception!", e);
+            throw new RuntimeException("serializer(obj=" + obj + ",class=" + obj.getClass() + ")  catch exception!", e);
         } finally {
             buffer.clear();
         }
